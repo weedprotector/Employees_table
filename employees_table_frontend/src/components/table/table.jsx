@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+import DateFilter from '../date-filter/date-filter';
 
 import {
     CSSTransition,
@@ -7,8 +9,30 @@ import {
 import './table.css'
 
 const Table = ({data}) => {
+    const [dateSort, setDateSort] = useState('')
+    const [sortedData, setSotredData] = useState([])
+
+    useEffect(() => {
+        setSotredData(data);
+    }, [data]);
+
+    useEffect(() => {
+        console.log(sortedData)
+        if (dateSort === 'old') {
+            setSotredData([...data].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt)))
+        }
+        if(dateSort === 'new') {
+            setSotredData([...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)))
+        }
+    }, [dateSort, data])
+
+    const onChangeSort = (sort) => {
+        setDateSort(sort)
+    }
+
+    
         
-    const elements = data.map(item => {
+    const elements = sortedData.map(item => {
         const date = item.createdAt.slice(0, 10).split('-').reverse().join('-');
 
         return (
@@ -32,7 +56,12 @@ const Table = ({data}) => {
                 <tr>
                     <th className="table-header-cell">id</th>
                     <th className="table-header-cell">Имя</th>
-                    <th className="table-header-cell">Дата</th>
+                    <th className="table-header-cell">Дата 
+                        <DateFilter onChangeSort={onChangeSort} 
+                                    value={dateSort}
+                                    options={[{'value': 'new', 'name': 'Сначала новые'},
+                                            {'value': 'old', 'name': 'Сначала старые'}]}/>
+                    </th>
                 </tr>
             </thead>
 

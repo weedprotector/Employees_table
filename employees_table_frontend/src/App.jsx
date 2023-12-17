@@ -8,7 +8,8 @@ import Table from './components/table/table';
 
 
 function App() {
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
+ 
 
   useEffect(() => {
     axios.get('/employees').then(res => {
@@ -22,6 +23,8 @@ function App() {
   const onDataUpdate = (newData) => {
     setData(newData)
   }
+
+ 
 
   return (
     <>
