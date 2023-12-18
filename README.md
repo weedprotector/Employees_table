@@ -2,14 +2,17 @@
 
 ## Run backend:
 
+### `cd Employees_table_backend`
+Rename `.env.example` to `.env`
 ### Install dependencies: `npm i`
 
-### `cd Employees_table_backend`
 Run: `npm run start:dev`
 
 
 ## Run frontend:
 In another terminal
-### Install dependencies: `npm i`
 ### `cd employees_table_frontend`
+Rename `.env.example` to `.env`
+### Install dependencies: `npm i`
+
 Run: `npm run start`

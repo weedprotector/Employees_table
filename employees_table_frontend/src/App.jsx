@@ -2,14 +2,14 @@ import axios from './axios';
 
 import { useState, useEffect } from 'react';
 
-
 import AddPanel from './components/add-panel/add-panel';
 import Table from './components/table/table';
+import SearchPanel from './components/search-panel/search-panel';
 
 
 function App() {
   const [data, setData] = useState([]);
- 
+  const [nameFilter, setNameFilter] = useState('')
 
   useEffect(() => {
     axios.get('/employees').then(res => {
@@ -20,16 +20,19 @@ function App() {
     })
   }, [])
 
-  const onDataUpdate = (newData) => {
-    setData(newData)
+  const onDataUpdate = (employee) => {
+    setData([...data, employee])
   }
 
- 
+  const updateNameFilter = (filter) => {
+    setNameFilter(filter)
+  }
 
   return (
     <>
       <AddPanel onDataUpdate={onDataUpdate}/>
-      <Table data={data}/>
+      <SearchPanel updateNameFilter={updateNameFilter}/>
+      <Table data={data} nameFilter={nameFilter}/>
     </>
   );
 }

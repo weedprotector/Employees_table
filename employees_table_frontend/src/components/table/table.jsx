@@ -8,31 +8,31 @@ import {
 
 import './table.css'
 
-const Table = ({data}) => {
+const Table = ({data, nameFilter}) => {
     const [dateSort, setDateSort] = useState('')
-    const [sortedData, setSotredData] = useState([])
+    const [filteredData, setFilteredData] = useState([])
 
     useEffect(() => {
-        setSotredData(data);
+        setFilteredData(data);
     }, [data]);
 
     useEffect(() => {
-        console.log(sortedData)
+        let updatedData = nameFilter ? data.filter(item => item.name.toLowerCase().includes(nameFilter.toLowerCase())) : data;
+    
         if (dateSort === 'old') {
-            setSotredData([...data].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt)))
+            updatedData = [...updatedData].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+        } else if (dateSort === 'new') {
+            updatedData = [...updatedData].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         }
-        if(dateSort === 'new') {
-            setSotredData([...data].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)))
-        }
-    }, [dateSort, data])
+    
+        setFilteredData(updatedData);
+    }, [dateSort, data, nameFilter]);
 
     const onChangeSort = (sort) => {
         setDateSort(sort)
     }
 
-    
-        
-    const elements = sortedData.map(item => {
+    const elements = filteredData.map(item => {
         const date = item.createdAt.slice(0, 10).split('-').reverse().join('-');
 
         return (

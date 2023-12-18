@@ -15,9 +15,6 @@ const AddPanel = ({onDataUpdate}) => {
 
         axios.post('/employees', {name})
             .then(res => {
-                return axios.get('/employees');
-            })
-            .then(res => {
                 onDataUpdate(res.data)
             })
             .catch((err) => {

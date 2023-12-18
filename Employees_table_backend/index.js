@@ -1,11 +1,12 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors"
+import 'dotenv/config'
 
 import * as EmployeeController from './controllers/EmployeesController.js'
 
 mongoose
-    .connect('mongodb+srv://weedprotector:testtesttest@cluster0.x84uipq.mongodb.net/blog?retryWrites=true&w=majority',)
+    .connect(process.env.BD_URL)
     .then(() => console.log('DB ok'))
     .catch((err) => console.log('DB error', err))
 
