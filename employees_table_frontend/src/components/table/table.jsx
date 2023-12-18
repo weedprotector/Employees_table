@@ -13,10 +13,6 @@ const Table = ({data, nameFilter}) => {
     const [filteredData, setFilteredData] = useState([])
 
     useEffect(() => {
-        setFilteredData(data);
-    }, [data]);
-
-    useEffect(() => {
         let updatedData = nameFilter ? data.filter(item => item.name.toLowerCase().includes(nameFilter.toLowerCase())) : data;
     
         if (dateSort === 'old') {

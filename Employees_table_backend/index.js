@@ -6,7 +6,7 @@ import 'dotenv/config'
 import * as EmployeeController from './controllers/EmployeesController.js'
 
 mongoose
-    .connect(process.env.BD_URL)
+    .connect(process.env.DB_URL)
     .then(() => console.log('DB ok'))
     .catch((err) => console.log('DB error', err))
 
