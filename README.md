@@ -1,5 +1,5 @@
 # How to open project
-`gh repo clone weedprotector/Employees_table`
+`git clone https://github.com/weedprotector/Employees_table.git`
 ## Run backend:
 
 ### `cd Employees_table_backend`
